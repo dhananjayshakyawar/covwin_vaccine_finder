@@ -1,0 +1,212 @@
+﻿{
+  "centers": [
+    {
+      "center_id": 552109,
+      "name": "Campbellbay PHC",
+      "address": "Campbellbay",
+      "state_name": "Andaman and Nicobar Islands",
+      "district_name": "Nicobar",
+      "block_name": "Campbell Bay",
+      "pincode": 744302,
+      "lat": 7,
+      "long": 93,
+      "from": "09:00:00",
+      "to": "17:00:00",
+      "fee_type": "Free",
+      "sessions": [
+        {
+          "session_id": "bfea957c-a34e-4b5f-99a0-4c739102eec5",
+          "date": "19-05-2021",
+          "available_capacity": 49,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 24,
+          "available_capacity_dose2": 25
+        },
+        {
+          "session_id": "3d225acf-0997-4aca-9835-dc82ec291891",
+          "date": "20-05-2021",
+          "available_capacity": 49,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 25,
+          "available_capacity_dose2": 24
+        },
+        {
+          "session_id": "c0077bda-eb3d-4ce3-9637-68aba033d07c",
+          "date": "21-05-2021",
+          "available_capacity": 50,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 25,
+          "available_capacity_dose2": 25
+        },
+        {
+          "session_id": "603333b6-48ee-462a-a13a-e0334ece571e",
+          "date": "22-05-2021",
+          "available_capacity": 50,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 25,
+          "available_capacity_dose2": 25
+        },
+        {
+          "session_id": "eaa9bad2-6b8a-47d5-af44-75dfed8b40a8",
+          "date": "23-05-2021",
+          "available_capacity": 50,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 25,
+          "available_capacity_dose2": 25
+        },
+        {
+          "session_id": "d52db543-aff8-49cd-bc3e-b3a10f4e8fb4",
+          "date": "24-05-2021",
+          "available_capacity": 50,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 25,
+          "available_capacity_dose2": 25
+        },
+        {
+          "session_id": "2c9ba17e-5a18-4395-a482-72268fb0abc4",
+          "date": "25-05-2021",
+          "available_capacity": 50,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 25,
+          "available_capacity_dose2": 25
+        }
+      ]
+    },
+    {
+      "center_id": 570779,
+      "name": "BJR Hospital",
+      "address": "Car Nicobar",
+      "state_name": "Andaman and Nicobar Islands",
+      "district_name": "Nicobar",
+      "block_name": "Car Nicobar",
+      "pincode": 744301,
+      "lat": 9,
+      "long": 92,
+      "from": "09:00:00",
+      "to": "17:00:00",
+      "fee_type": "Free",
+      "sessions": [
+        {
+          "session_id": "f7d34d28-d936-4a25-95eb-7a1cdd09c545",
+          "date": "19-05-2021",
+          "available_capacity": 47,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 22,
+          "available_capacity_dose2": 25
+        },
+        {
+          "session_id": "f7f77ca6-6752-4741-9652-25717cffec16",
+          "date": "22-05-2021",
+          "available_capacity": 48,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 24,
+          "available_capacity_dose2": 24
+        },
+        {
+          "session_id": "efcf0927-6759-445d-a44a-e6563fbfa03b",
+          "date": "23-05-2021",
+          "available_capacity": 48,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 25,
+          "available_capacity_dose2": 23
+        },
+        {
+          "session_id": "31cd60f2-2917-493b-a43b-0755e903b574",
+          "date": "25-05-2021",
+          "available_capacity": 48,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 23,
+          "available_capacity_dose2": 25
+        }
+      ]
+    },
+    {
+      "center_id": 552108,
+      "name": "Nancowry CHC",
+      "address": "Nancowry",
+      "state_name": "Andaman and Nicobar Islands",
+      "district_name": "Nicobar",
+      "block_name": "Nancowry",
+      "pincode": 744303,
+      "lat": 7,
+      "long": 93,
+      "from": "09:00:00",
+      "to": "17:00:00",
+      "fee_type": "Free",
+      "sessions": [
+        {
+          "session_id": "2a73f5c0-d0f8-4272-9cf1-2e68f20d8751",
+          "date": "19-05-2021",
+          "available_capacity": 50,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 25,
+          "available_capacity_dose2": 25
+        },
+        {
+          "session_id": "58f7deae-57dc-402d-a7e4-82873806775c",
+          "date": "20-05-2021",
+          "available_capacity": 50,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 25,
+          "available_capacity_dose2": 25
+        },
+        {
+          "session_id": "775fe3a5-1e19-4524-8735-653925b09e47",
+          "date": "22-05-2021",
+          "available_capacity": 50,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 25,
+          "available_capacity_dose2": 25
+        },
+        {
+          "session_id": "05ae633a-5399-41fb-a036-38f9fcf8ff50",
+          "date": "23-05-2021",
+          "available_capacity": 50,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 25,
+          "available_capacity_dose2": 25
+        },
+        {
+          "session_id": "82d481ed-c50b-46cd-81c8-50155e0995e9",
+          "date": "25-05-2021",
+          "available_capacity": 50,
+          "min_age_limit": 45,
+          "vaccine": "COVISHIELD",
+          "slots": [ "09:00AM-11:00AM", "11:00AM-01:00PM", "01:00PM-03:00PM", "03:00PM-05:00PM" ],
+          "available_capacity_dose1": 25,
+          "available_capacity_dose2": 25
+        }
+      ]
+    }
+  ]
+}

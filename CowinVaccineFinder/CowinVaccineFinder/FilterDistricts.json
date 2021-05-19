@@ -1,0 +1,12 @@
+﻿{
+  "districts": [
+    {
+      "district_name": "Mumbai",
+      "state_name": "Maharashtra"
+    },
+    {
+      "district_name": "Thane",
+      "state_name": "Maharashtra"
+    }
+  ]
+}

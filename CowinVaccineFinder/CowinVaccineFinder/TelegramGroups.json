@@ -1,0 +1,258 @@
+﻿{
+  "ok": true,
+  "result": [
+    {
+      "update_id": 677449080,
+      "my_chat_member": {
+        "chat": {
+          "id": -1001180480081,
+          "title": "Test",
+          "type": "channel"
+        },
+        "from": {
+          "id": 1815261545,
+          "is_bot": false,
+          "first_name": "Dhananjay",
+          "last_name": "Shakyawar"
+        },
+        "date": 1621383918,
+        "old_chat_member": {
+          "user": {
+            "id": 1751016490,
+            "is_bot": true,
+            "first_name": "Cowin",
+            "username": "Cowindjbot"
+          },
+          "status": "left"
+        },
+        "new_chat_member": {
+          "user": {
+            "id": 1751016490,
+            "is_bot": true,
+            "first_name": "Cowin",
+            "username": "Cowindjbot"
+          },
+          "status": "administrator",
+          "can_be_edited": false,
+          "can_manage_chat": true,
+          "can_change_info": true,
+          "can_post_messages": true,
+          "can_edit_messages": true,
+          "can_delete_messages": true,
+          "can_invite_users": true,
+          "can_restrict_members": true,
+          "can_promote_members": false,
+          "can_manage_voice_chats": true,
+          "is_anonymous": false
+        }
+      }
+    },
+    {
+      "update_id": 677449081,
+      "message": {
+        "message_id": 1,
+        "from": {
+          "id": 1815261545,
+          "is_bot": false,
+          "first_name": "Dhananjay",
+          "last_name": "Shakyawar"
+        },
+        "chat": {
+          "id": 1815261545,
+          "first_name": "Dhananjay",
+          "last_name": "Shakyawar",
+          "type": "private"
+        },
+        "date": 1621385070,
+        "text": "/start",
+        "entities": [
+          {
+            "offset": 0,
+            "length": 6,
+            "type": "bot_command"
+          }
+        ]
+      }
+    },
+    {
+      "update_id": 677449082,
+      "message": {
+        "message_id": 2,
+        "from": {
+          "id": 1815261545,
+          "is_bot": false,
+          "first_name": "Dhananjay",
+          "last_name": "Shakyawar",
+          "language_code": "en"
+        },
+        "chat": {
+          "id": 1815261545,
+          "first_name": "Dhananjay",
+          "last_name": "Shakyawar",
+          "type": "private"
+        },
+        "date": 1621385078,
+        "text": "Hi"
+      }
+    },
+    {
+      "update_id": 677449083,
+      "channel_post": {
+        "message_id": 45,
+        "sender_chat": {
+          "id": -1001180480081,
+          "title": "COVID DJ Mumbai Thane",
+          "type": "channel"
+        },
+        "chat": {
+          "id": -1001180480081,
+          "title": "COVID DJ Mumbai Thane",
+          "type": "channel"
+        },
+        "date": 1621390138,
+        "new_chat_title": "COVID DJ Mumbai Thane"
+      }
+    },
+    {
+      "update_id": 677449084,
+      "my_chat_member": {
+        "chat": {
+          "id": -1001207388460,
+          "title": "COWIN-18-PLUS-MH-THANE",
+          "type": "channel"
+        },
+        "from": {
+          "id": 1815261545,
+          "is_bot": false,
+          "first_name": "Dhananjay",
+          "last_name": "Shakyawar",
+          "language_code": "en"
+        },
+        "date": 1621416710,
+        "old_chat_member": {
+          "user": {
+            "id": 1751016490,
+            "is_bot": true,
+            "first_name": "Cowin",
+            "username": "Cowindjbot"
+          },
+          "status": "left"
+        },
+        "new_chat_member": {
+          "user": {
+            "id": 1751016490,
+            "is_bot": true,
+            "first_name": "Cowin",
+            "username": "Cowindjbot"
+          },
+          "status": "administrator",
+          "can_be_edited": false,
+          "can_manage_chat": true,
+          "can_change_info": true,
+          "can_post_messages": true,
+          "can_edit_messages": true,
+          "can_delete_messages": true,
+          "can_invite_users": true,
+          "can_restrict_members": true,
+          "can_promote_members": false,
+          "can_manage_voice_chats": true,
+          "is_anonymous": false
+        }
+      }
+    },
+    {
+      "update_id": 677449085,
+      "my_chat_member": {
+        "chat": {
+          "id": -1001382711013,
+          "title": "COWIN-18-PLUS-MH-MUMBAI",
+          "type": "channel"
+        },
+        "from": {
+          "id": 1815261545,
+          "is_bot": false,
+          "first_name": "Dhananjay",
+          "last_name": "Shakyawar",
+          "language_code": "en"
+        },
+        "date": 1621416727,
+        "old_chat_member": {
+          "user": {
+            "id": 1751016490,
+            "is_bot": true,
+            "first_name": "Cowin",
+            "username": "Cowindjbot"
+          },
+          "status": "left"
+        },
+        "new_chat_member": {
+          "user": {
+            "id": 1751016490,
+            "is_bot": true,
+            "first_name": "Cowin",
+            "username": "Cowindjbot"
+          },
+          "status": "administrator",
+          "can_be_edited": false,
+          "can_manage_chat": true,
+          "can_change_info": true,
+          "can_post_messages": true,
+          "can_edit_messages": true,
+          "can_delete_messages": true,
+          "can_invite_users": true,
+          "can_restrict_members": true,
+          "can_promote_members": false,
+          "can_manage_voice_chats": true,
+          "is_anonymous": false
+        }
+      }
+    },
+    {
+      "update_id": 677449086,
+      "my_chat_member": {
+        "chat": {
+          "id": -1001166172103,
+          "title": "COWIN-18-PLUS-MP-SHAHDOL",
+          "type": "channel"
+        },
+        "from": {
+          "id": 1815261545,
+          "is_bot": false,
+          "first_name": "Dhananjay",
+          "last_name": "Shakyawar",
+          "language_code": "en"
+        },
+        "date": 1621416843,
+        "old_chat_member": {
+          "user": {
+            "id": 1751016490,
+            "is_bot": true,
+            "first_name": "Cowin",
+            "username": "Cowindjbot"
+          },
+          "status": "left"
+        },
+        "new_chat_member": {
+          "user": {
+            "id": 1751016490,
+            "is_bot": true,
+            "first_name": "Cowin",
+            "username": "Cowindjbot"
+          },
+          "status": "administrator",
+          "can_be_edited": false,
+          "can_manage_chat": true,
+          "can_change_info": true,
+          "can_post_messages": true,
+          "can_edit_messages": true,
+          "can_delete_messages": true,
+          "can_invite_users": true,
+          "can_restrict_members": true,
+          "can_promote_members": false,
+          "can_manage_voice_chats": true,
+          "is_anonymous": false
+        }
+      }
+    }
+  ]
+}

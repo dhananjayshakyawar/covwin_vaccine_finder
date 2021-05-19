@@ -1,10 +1,10 @@
-﻿using Telegram.Bot.Types;
+﻿using System;
+using Telegram.Bot.Types;
 
 namespace CowinVaccineFinder
 {
     public class AppConfig
     {
-        public SmtpOptions Smtp { get; set; }
         public MassTransitOptions MassTransit { get; set; }
         public string ConnectionString { get; set; }
         public string ResourceCalendarByDistrict { get; set; }
@@ -16,6 +16,8 @@ namespace CowinVaccineFinder
         public int FilterMinAge { get;  set; }
         public string TelegramChatId { get;  set; }
         public string TelegramApiToken { get;  set; }
+        public string TelegramGetUpdateResourceFormat { get;  set; }
         public int WaitSeconds { get;  set; }
+        public Uri TelegramAPI { get;  set; }
     }
 }

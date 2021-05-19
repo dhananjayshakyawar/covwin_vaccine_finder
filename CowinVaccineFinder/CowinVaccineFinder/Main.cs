@@ -1,7 +1,6 @@
 ﻿using log4net;
 using Newtonsoft.Json;
 using System;
-using Telegram.Bot;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -15,6 +14,9 @@ namespace CowinVaccineFinder
         private readonly ICowinService cowinService;
         private readonly AppConfig config;
         private readonly ITelegramHelper telegram;
+        private readonly string doseTrackerFormat = "{0},{1},{2}";
+        private Dictionary<string, string> DoseTracker;
+        private int apiCallsCowin = 0;
 
         public Main(ICowinService cowinService, AppConfig config, ITelegramHelper telegram)
         {
@@ -22,6 +24,7 @@ namespace CowinVaccineFinder
             this.cowinService = cowinService;
             this.config = config;
             this.telegram = telegram;
+            DoseTracker = new Dictionary<string, string>();
         }
 
         public void Run()
@@ -31,7 +34,6 @@ namespace CowinVaccineFinder
             var filteredDistricts = JsonConvert.DeserializeObject<FilterDistricts>
                                     (System.IO.File.ReadAllText(config.FilterJsonFile)).Districts;
             var states = cowinService.GetAllStates();
-
 
             while (true)
             {
@@ -48,6 +50,7 @@ namespace CowinVaccineFinder
                             continue;
                         //get districts
                         var districts = cowinService.GetAllDistrictsByState(state);
+                        apiCallsCowin += 1;
 
 
                         //for each dis get schedule
@@ -56,10 +59,12 @@ namespace CowinVaccineFinder
                             if (!(district.Name == destrictsToCheck.District))
                                 continue;
                             var centers = cowinService.GetDistrictSchedule(district, DateTime.Now);
+                            apiCallsCowin += 1;
+
 
                             var availableCenters = centers.Where(x => (x.VaccineSessions.Count() > 0
                                                 && x.VaccineSessions.Any
-                                                (y => (y.CapacityDose2 > 0 &&
+                                                (y => (y.TotalCapacity > 0 &&
                                                 y.MinimunAge == config.FilterMinAge))))
                                                 .ToList();
 
@@ -67,22 +72,56 @@ namespace CowinVaccineFinder
                             {
                                 foreach (var session in center.VaccineSessions)
                                 {
-                                    if  (!(session.MinimunAge == config.FilterMinAge && session.CapacityDose1 > 0))
+                                    if  (!(session.MinimunAge == config.FilterMinAge && session.TotalCapacity > 0))
                                         continue;
 
-                                    var msg = string.Format("Vaccine available: {8}" +
+                                    if (DoseTracker.ContainsKey(center.PinCode)
+                                        && (DoseTracker[center.PinCode] ==  
+                                        string.Format(doseTrackerFormat,
+                                                        session.MinimunAge,
+                                                        session.CapacityDose1,
+                                                        session.CapacityDose2)))
+                                    {
+                                        continue;
+                                    }
+                                    else if (DoseTracker.ContainsKey(center.PinCode))
+                                    {
+                                        DoseTracker[center.PinCode] = string.Format(doseTrackerFormat,
+                                                                                    session.MinimunAge,
+                                                                                    session.CapacityDose1, 
+                                                                                    session.CapacityDose2);
+                                    }
+                                    else
+                                    {
+                                        DoseTracker.Add(center.PinCode, string.Format(doseTrackerFormat,
+                                                                                    session.MinimunAge,
+                                                                                    session.CapacityDose1,
+                                                                                    session.CapacityDose2));
+                                    }
+
+
+                                    var dose = session.CapacityDose1 > 0 ? "Dose-1 &":string.Empty;
+                                    dose += session.CapacityDose2 > 0 ? "Dose-2 &": string.Empty;
+
+                                    dose = dose.Substring(0, dose.Length - 2);
+
+                                    var msg = string.Format("**{9}** available: {8}" +
                                     "\n\nHospital: {0}\n{7}\nPIN:{1}\n\nVaccine:{2}\nFees:{3}" +
                                     "\nAge:{4}+\n\nDose1 available: {5}\nDose2 available: {6}",
                                     center.Name,
                                     center.PinCode,
                                     session.Vaccine,
+                                    center.FeeType == "Free"? "Free": 
                                     center.VaccineFees.Single(x=> x.Vaccine == session.Vaccine).Fee,
                                     session.MinimunAge,
                                     session.CapacityDose1,
                                     session.CapacityDose2,
                                     center.District,
-                                    session.Date);
-                                    var tsk = telegram.SendMessageAsync(msg);
+                                    session.Date,
+                                    dose);
+
+                                    var chatId = telegram.GetChatId(destrictsToCheck.TelegramGroup);
+                                    var tsk = telegram.SendMessageAsync(msg, chatId);
 
                                     tasks.Add(tsk);
                                     updateSent = true;
@@ -97,9 +136,24 @@ namespace CowinVaccineFinder
                     }
                     //send comms
                     Task.WaitAll(tasks.ToArray());
+                    tasks.Clear();
+
+                    //CheckApiThreashold();
+                    Thread.Sleep(100);
                 }
-                var wait = updateSent?config.WaitSeconds:30000;
-                Thread.Sleep(wait);
+
+                Thread.Sleep(60000);
+                //CheckApiThreashold();
+            }
+        }
+        private void CheckApiThreashold()
+        {
+            if (apiCallsCowin >= 95)
+            {
+                logger.InfoFormat("Reached call Limit - {0}. Wait for {1} millis",
+                    apiCallsCowin,config.WaitSeconds);
+                Thread.Sleep(config.WaitSeconds);
+                apiCallsCowin = 0;
             }
         }
     }

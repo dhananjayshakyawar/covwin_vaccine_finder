@@ -2,11 +2,32 @@
   "districts": [
     {
       "district_name": "Mumbai",
-      "state_name": "Maharashtra"
+      "state_name": "Maharashtra",
+      "telegram_group": "COWIN-18-PLUS-MH-MUMBAI",
+      "min_age": "18",
+      "telegram_group_id": ""
+
     },
     {
       "district_name": "Thane",
-      "state_name": "Maharashtra"
+      "state_name": "Maharashtra",
+      "telegram_group": "COWIN-18-PLUS-MH-THANE",
+      "min_age": "18",
+      "telegram_group_id": ""
+    },
+    {
+      "district_name": "Shahdol",
+      "state_name": "Madhya Pradesh",
+      "telegram_group": "COWIN-18-PLUS-MP-SHAHDOL",
+      "min_age": "18",
+      "telegram_group_id": ""
+    },
+    {
+      "district_name": "Indore",
+      "state_name": "Madhya Pradesh",
+      "telegram_group": "COWIN-18-PLUS-MP-INDORE",
+      "min_age": "18",
+      "telegram_group_id": ""
     }
   ]
 }

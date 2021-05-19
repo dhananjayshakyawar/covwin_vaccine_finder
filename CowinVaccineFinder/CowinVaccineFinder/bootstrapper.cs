@@ -11,7 +11,6 @@ namespace CowinVaccineFinder
         {
             //setup our DI
             var serviceProvider = new ServiceCollection()
-                .AddSingleton<IFooService, FooService>()
                 .AddSingleton<ITelegramHelper, TelegramHelper>()
                 .AddSingleton<ICowinService, CowinService>()
                 .AddSingleton<IRestHelper, RestHelper>()

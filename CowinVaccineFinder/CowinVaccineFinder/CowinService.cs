@@ -28,6 +28,12 @@ namespace CowinVaccineFinder
                 logger.Info(string.Format("Fetching Districts for State {0}-{1} ...",state.StateName, state.StateId));
                 var request = new RestRequest(string.Format(config.ResourceDistrictFormat, state.StateId), Method.GET);
                 IRestResponse response = restClient.GetRestClient.Execute(request);
+
+                if(!response.IsSuccessful)
+                {
+                    logger.WarnFormat("Response failed - {0}", response);
+                }
+
                 var data = JsonConvert.DeserializeObject<ResponseDistrict>(response.Content);
                 logger.Info(string.Format("Received {0} districts for {1}",data.Districts.Count(), state.StateName));
                 return data.Districts;

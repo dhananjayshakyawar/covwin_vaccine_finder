@@ -7,7 +7,6 @@ namespace CowinVaccineFinder
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             var applcation = new bootstrapper();
             applcation.InitializeApplication(InitOptions<AppConfig>()).Run();
 

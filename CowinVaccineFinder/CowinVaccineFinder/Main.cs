@@ -1,10 +1,10 @@
 ﻿using log4net;
 using Newtonsoft.Json;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace CowinVaccineFinder
 {
@@ -67,6 +67,8 @@ namespace CowinVaccineFinder
                                                 (y => (y.TotalCapacity > 0 &&
                                                 y.MinimunAge == config.FilterMinAge))))
                                                 .ToList();
+                            if (availableCenters.Count == 0)
+                                logger.InfoFormat("No updates from API for: {0}", district.Name);
 
                             foreach (var center in availableCenters)
                             {
@@ -82,6 +84,10 @@ namespace CowinVaccineFinder
                                                         session.CapacityDose1,
                                                         session.CapacityDose2)))
                                     {
+                                        logger.InfoFormat("Ignoring...No change for {0} - {1}",
+                                            center.District,
+                                            DoseTracker[center.PinCode]);
+
                                         continue;
                                     }
                                     else if (DoseTracker.ContainsKey(center.PinCode))
@@ -120,6 +126,7 @@ namespace CowinVaccineFinder
                                     session.Date,
                                     dose);
 
+                                    logger.InfoFormat("Sending comms - {0} : {1}", destrictsToCheck.TelegramGroup, msg);
                                     var chatId = telegram.GetChatId(destrictsToCheck.TelegramGroup);
                                     var tsk = telegram.SendMessageAsync(msg, chatId);
 

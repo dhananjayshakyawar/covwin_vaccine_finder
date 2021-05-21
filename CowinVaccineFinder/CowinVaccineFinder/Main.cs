@@ -14,7 +14,7 @@ namespace CowinVaccineFinder
         private readonly ICowinService cowinService;
         private readonly AppConfig config;
         private readonly ITelegramHelper telegram;
-        private readonly string doseTrackerFormat = "{0},{1},{2}";
+        private readonly string doseTrackerFormat = "{0},{1}";
         private Dictionary<string, string> DoseTracker;
         private int apiCallsCowin = 0;
 
@@ -64,7 +64,7 @@ namespace CowinVaccineFinder
 
                             var availableCenters = centers.Where(x => (x.VaccineSessions.Count() > 0
                                                 && x.VaccineSessions.Any
-                                                (y => (y.TotalCapacity > 0 &&
+                                                (y => (y.CapacityDose1 > 0 &&
                                                 y.MinimunAge == config.FilterMinAge))))
                                                 .ToList();
                             if (availableCenters.Count == 0)
@@ -74,7 +74,7 @@ namespace CowinVaccineFinder
                             {
                                 foreach (var session in center.VaccineSessions)
                                 {
-                                    if  (!(session.MinimunAge == config.FilterMinAge && session.TotalCapacity > 0))
+                                    if  (!(session.MinimunAge == config.FilterMinAge && session.CapacityDose1 > 0))
                                         continue;
 
                                     if (DoseTracker.ContainsKey(center.PinCode)
@@ -106,14 +106,14 @@ namespace CowinVaccineFinder
                                     }
 
 
-                                    var dose = session.CapacityDose1 > 0 ? "Dose-1 &":string.Empty;
-                                    dose += session.CapacityDose2 > 0 ? "Dose-2 &": string.Empty;
+                                    var dose = session.CapacityDose1 > 0 ? string.Format("Dose-1, Qty:{0} &", session.CapacityDose1) :string.Empty;
+                                    dose += session.CapacityDose2 > 0 ? string.Format(" Dose-2, Qty:{0} &", session.CapacityDose2) : string.Empty;
 
                                     dose = dose.Substring(0, dose.Length - 2);
 
-                                    var msg = string.Format("**{9}** available: {8}" +
+                                    var msg = string.Format("**{9}** available\nDate: {8}" +
                                     "\n\nHospital: {0}\n{7}\nPIN:{1}\n\nVaccine:{2}\nFees:{3}" +
-                                    "\nAge:{4}+\n\nDose1 available: {5}\nDose2 available: {6}",
+                                    "\nAge:{4}+\n\nDose1 available: {5}\nDose2 available: {6}\n",
                                     center.Name,
                                     center.PinCode,
                                     session.Vaccine,

@@ -25,13 +25,15 @@ namespace CowinVaccineFinder
         {
             try
             {
-                logger.Info(string.Format("Fetching Districts for State {0}-{1} ...",state.StateName, state.StateId));
+                logger.Info(string.Format("[HEADER] Fetching Districts for State {0}-{1} ...",state.StateName, state.StateId));
                 var request = new RestRequest(string.Format(config.ResourceDistrictFormat, state.StateId), Method.GET);
+                request.AddHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36");
                 IRestResponse response = restClient.GetRestClient.Execute(request);
 
                 if(!response.IsSuccessful)
                 {
                     logger.WarnFormat("Response failed - {0}", response);
+                    return new List<District>();
                 }
 
                 var data = JsonConvert.DeserializeObject<ResponseDistrict>(response.Content);
@@ -49,9 +51,17 @@ namespace CowinVaccineFinder
         {
             try
             {
-                logger.Info("Fetching States...");
+                logger.Info("[HEADER] Fetching States...");
                 var request = new RestRequest(config.ResourceStates, Method.GET);
+                request.AddHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36");
                 IRestResponse response = restClient.GetRestClient.Execute(request);
+                if (!response.IsSuccessful)
+                {
+                    logger.ErrorFormat("Request Failed - {0}", response.StatusCode);
+                    logger.Error(response);
+                    return new List<State>();
+                }
+                    
                 var data = JsonConvert.DeserializeObject<ResponseState>(response.Content);
                 return data.States;
             }
@@ -67,9 +77,15 @@ namespace CowinVaccineFinder
         {
             try
             {
-                logger.Info(string.Format("Fetching Schedule for {0} district starting from {1} ...", district.Name, startDate.ToString("dd-MM-yyyy")));
+                logger.Info(string.Format("[HEADER]  Fetching Schedule for {0} district starting from {1} ...", district.Name, startDate.ToString("dd-MM-yyyy")));
                 var request = new RestRequest(string.Format(config.ResourceDistrictCalendarFormat, district.Id, startDate.ToString("dd-MM-yyyy")), Method.GET);
+                request.AddHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36");
                 IRestResponse response = restClient.GetRestClient.Execute(request);
+                if (!response.IsSuccessful)
+                {
+                    logger.WarnFormat("Response failed - {0}", response);
+                    return new List<CovidCenter>();
+                }
                 var data = JsonConvert.DeserializeObject<ResponseDistrictCalendar>(response.Content);
                 return data.CovidCenters;
             }

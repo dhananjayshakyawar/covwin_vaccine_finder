@@ -39,7 +39,6 @@ namespace CowinVaccineFinder
             {
 
                 var tasks = new List<Task>();
-                var updateSent = false;
 
                 foreach (var destrictsToCheck in filteredDistricts)
                 {
@@ -131,7 +130,6 @@ namespace CowinVaccineFinder
                                     var tsk = telegram.SendMessageAsync(msg, chatId);
 
                                     tasks.Add(tsk);
-                                    updateSent = true;
                                 }
                             }
 
@@ -149,7 +147,7 @@ namespace CowinVaccineFinder
                     Thread.Sleep(100);
                 }
 
-                Thread.Sleep(60000);
+                Thread.Sleep(6* filteredDistricts.Count()*1000);
                 //CheckApiThreashold();
             }
         }

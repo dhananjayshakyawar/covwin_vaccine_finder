@@ -5,7 +5,7 @@
       "state_name": "Maharashtra",
       "telegram_group": "COWIN-18-PLUS-MH-MUMBAI",
       "min_age": "18",
-      "telegram_group_id": ""
+      "telegram_group_id": "-1001382711013"
 
     },
     {
@@ -13,21 +13,28 @@
       "state_name": "Maharashtra",
       "telegram_group": "COWIN-18-PLUS-MH-THANE",
       "min_age": "18",
-      "telegram_group_id": ""
+      "telegram_group_id": "-1001207388460"
     },
     {
       "district_name": "Shahdol",
       "state_name": "Madhya Pradesh",
       "telegram_group": "COWIN-18-PLUS-MP-SHAHDOL",
       "min_age": "18",
-      "telegram_group_id": ""
+      "telegram_group_id": "-1001166172103"
     },
     {
       "district_name": "Indore",
       "state_name": "Madhya Pradesh",
       "telegram_group": "COWIN-18-PLUS-MP-INDORE",
       "min_age": "18",
-      "telegram_group_id": ""
+      "telegram_group_id": "-1001162642870"
+    },
+    {
+      "district_name": "Bhopal",
+      "state_name": "Madhya Pradesh",
+      "telegram_group": "COWIN-18-PLUS-MP-BHOPAL",
+      "min_age": "18",
+      "telegram_group_id": "-1001329862508"
     }
   ]
 }

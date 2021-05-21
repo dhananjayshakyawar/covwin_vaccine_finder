@@ -1,12 +1,10 @@
 ﻿using log4net;
 using Newtonsoft.Json;
-using RestSharp;
 using System.Collections.Generic;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-using System.Linq;
 
 namespace CowinVaccineFinder
 {
@@ -22,40 +20,30 @@ namespace CowinVaccineFinder
             this.config = config;
             this.logger = Logger.GetLogger<Main>();
             chatGroups = new Dictionary<string, string>();
-
-            chatGroups.Add("COWIN-18-PLUS-MH-THANE", "-1001207388460");
-            chatGroups.Add("COWIN-18-PLUS-MH-MUMBAI", "-1001382711013");
-            chatGroups.Add("COWIN-18-PLUS-MP-SHAHDOL", "-1001166172103");
-            chatGroups.Add("COWIN-18-PLUS-MP-INDORE", "-1001162642870");
+            FetchChatIds();
         }
+
 
         public string GetChatId(string groupName)
         {
-
             if (chatGroups.ContainsKey(groupName))
                 return chatGroups[groupName];
 
+            logger.InfoFormat("Unable to find chat id for telegram groups: {0}", groupName);
+            return string.Empty;
+        }
+        public void FetchChatIds()
+        {
 
-            var restClient = new 
-                RestClient(config.TelegramAPI);
 
-            logger.Info(string.Format("Fetching Group ID for {0} ...", groupName));
-            var request = new RestRequest(
-                string.Format(config.TelegramGetUpdateResourceFormat
-                , config.TelegramApiToken), Method.GET);
+            var filteredDistricts = JsonConvert.DeserializeObject<FilterDistricts>
+                        (System.IO.File.ReadAllText(config.FilterJsonFile)).Districts;
 
-            IRestResponse response = restClient.Execute(request);
-
-            if (response.IsSuccessful)
+            foreach (var district in filteredDistricts)
             {
-                var data = JsonConvert.DeserializeObject<ResponseTelegramUpdate>(response.Content);
-
-                var chat = data.ChatUpdates.Single(x => x.ChatMembers.GroupTitle == groupName);
-
-                return chat.ChatMembers.Id;
+                chatGroups.Add(district.TelegramGroup, district.TelegramGroupId);
             }
 
-            return string.Empty;
         }
         public async System.Threading.Tasks.Task SendMessageAsync(string message, string chatId)
         {

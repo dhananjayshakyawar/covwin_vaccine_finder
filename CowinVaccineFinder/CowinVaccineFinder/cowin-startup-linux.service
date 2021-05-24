@@ -1,0 +1,13 @@
+﻿[Unit]
+Description=Reboot message systemd service.
+
+[Service]
+Type=simple
+ExecStart=/bin/bash  /home/ec2-user/cowin-tracker/start-linux.sh
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target+

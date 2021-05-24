@@ -29,12 +29,26 @@
       "min_age": "18",
       "telegram_group_id": "-1001162642870"
     },
+    //{
+    //  "district_name": "Bhopal",
+    //  "state_name": "Madhya Pradesh",
+    //  "telegram_group": "COWIN-18-PLUS-MP-BHOPAL",
+    //  "min_age": "18",
+    //  "telegram_group_id": "-1001329862508"
+    //},
+    //{
+    //  "district_name": "Jabalpur",
+    //  "state_name": "Madhya Pradesh",
+    //  "telegram_group": "COWIN-18-PLUS-MP-JABALPUR",
+    //  "min_age": "18",
+    //  "telegram_group_id": "-1001353849626"
+    //},
     {
-      "district_name": "Bhopal",
-      "state_name": "Madhya Pradesh",
-      "telegram_group": "COWIN-18-PLUS-MP-BHOPAL",
+      "district_name": "Dehradun",
+      "state_name": "Uttarakhand",
+      "telegram_group": "COWIN-18-PLUS-MP-DEHRADUN",
       "min_age": "18",
-      "telegram_group_id": "-1001329862508"
+      "telegram_group_id": "-1001121387388"
     }
   ]
 }

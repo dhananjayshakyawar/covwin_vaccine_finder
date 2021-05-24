@@ -42,6 +42,7 @@ namespace CowinVaccineFinder
 
                 foreach (var destrictsToCheck in filteredDistricts)
                 {
+                    var totalDoseForDistrict = 0;
 
                     foreach (var state in states)
                     {
@@ -49,7 +50,6 @@ namespace CowinVaccineFinder
                             continue;
                         //get districts
                         var districts = cowinService.GetAllDistrictsByState(state);
-                        apiCallsCowin += 1;
 
 
                         //for each dis get schedule
@@ -57,13 +57,12 @@ namespace CowinVaccineFinder
                         {
                             if (!(district.Name == destrictsToCheck.District))
                                 continue;
-                            var centers = cowinService.GetDistrictSchedule(district, DateTime.Now);
-                            apiCallsCowin += 1;
+                            var centers = cowinService.GetDistrictSchedule(district, DateTime.Now.ToLocalTime());
 
 
                             var availableCenters = centers.Where(x => (x.VaccineSessions.Count() > 0
                                                 && x.VaccineSessions.Any
-                                                (y => (y.CapacityDose1 > 0 &&
+                                                (y => (y.CapacityDose1 > 1 &&
                                                 y.MinimunAge == config.FilterMinAge))))
                                                 .ToList();
                             if (availableCenters.Count == 0)
@@ -73,11 +72,11 @@ namespace CowinVaccineFinder
                             {
                                 foreach (var session in center.VaccineSessions)
                                 {
-                                    if  (!(session.MinimunAge == config.FilterMinAge && session.CapacityDose1 > 0))
+                                    if (!(session.MinimunAge == config.FilterMinAge && session.CapacityDose1 > 1))
                                         continue;
 
                                     if (DoseTracker.ContainsKey(center.PinCode)
-                                        && (DoseTracker[center.PinCode] ==  
+                                        && (DoseTracker[center.PinCode] ==
                                         string.Format(doseTrackerFormat,
                                                         session.MinimunAge,
                                                         session.CapacityDose1,
@@ -93,7 +92,7 @@ namespace CowinVaccineFinder
                                     {
                                         DoseTracker[center.PinCode] = string.Format(doseTrackerFormat,
                                                                                     session.MinimunAge,
-                                                                                    session.CapacityDose1, 
+                                                                                    session.CapacityDose1,
                                                                                     session.CapacityDose2);
                                     }
                                     else
@@ -105,7 +104,7 @@ namespace CowinVaccineFinder
                                     }
 
 
-                                    var dose = session.CapacityDose1 > 0 ? string.Format("Dose-1, Qty:{0} &", session.CapacityDose1) :string.Empty;
+                                    var dose = session.CapacityDose1 > 0 ? string.Format("Dose-1, Qty:{0} &", session.CapacityDose1) : string.Empty;
                                     dose += session.CapacityDose2 > 0 ? string.Format(" Dose-2, Qty:{0} &", session.CapacityDose2) : string.Empty;
 
                                     dose = dose.Substring(0, dose.Length - 2);
@@ -116,8 +115,8 @@ namespace CowinVaccineFinder
                                     center.Name,
                                     center.PinCode,
                                     session.Vaccine,
-                                    center.FeeType == "Free"? "Free": 
-                                    center.VaccineFees.Single(x=> x.Vaccine == session.Vaccine).Fee,
+                                    center.FeeType == "Free" ? "Free" :
+                                    center.VaccineFees.Single(x => x.Vaccine == session.Vaccine).Fee,
                                     session.MinimunAge,
                                     session.CapacityDose1,
                                     session.CapacityDose2,
@@ -125,7 +124,10 @@ namespace CowinVaccineFinder
                                     session.Date,
                                     dose);
 
+                                    totalDoseForDistrict += session.CapacityDose1;
+
                                     logger.InfoFormat("Sending comms - {0} : {1}", destrictsToCheck.TelegramGroup, msg);
+
                                     var chatId = telegram.GetChatId(destrictsToCheck.TelegramGroup);
                                     var tsk = telegram.SendMessageAsync(msg, chatId);
 
@@ -133,8 +135,11 @@ namespace CowinVaccineFinder
                                 }
                             }
 
-
-
+                            if (totalDoseForDistrict > 1)
+                                System.IO.File.AppendAllText(string.Format("html/data/{0}{1}.datapoints", district.Name, DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy"))
+                                , string.Format("{0},{1}{2}", DateTime.Now.ToJavascriptTicks(),
+                                                        totalDoseForDistrict,
+                                                        Environment.NewLine));
                             //check available
                         }
 
@@ -147,18 +152,8 @@ namespace CowinVaccineFinder
                     Thread.Sleep(100);
                 }
 
-                Thread.Sleep(6* filteredDistricts.Count()*1000);
+                Thread.Sleep(6 * filteredDistricts.Count() * 1000);
                 //CheckApiThreashold();
-            }
-        }
-        private void CheckApiThreashold()
-        {
-            if (apiCallsCowin >= 95)
-            {
-                logger.InfoFormat("Reached call Limit - {0}. Wait for {1} millis",
-                    apiCallsCowin,config.WaitSeconds);
-                Thread.Sleep(config.WaitSeconds);
-                apiCallsCowin = 0;
             }
         }
     }

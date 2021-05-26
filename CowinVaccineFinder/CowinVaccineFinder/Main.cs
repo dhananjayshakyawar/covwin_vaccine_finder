@@ -76,29 +76,46 @@ namespace CowinVaccineFinder
                                     if (!(session.MinimunAge == config.FilterMinAge && session.CapacityDose1 > 1))
                                         continue;
 
-                                    if (DoseTracker.ContainsKey(center.PinCode)
-                                        && (DoseTracker[center.PinCode] ==
+                                    var centerKey = string.Format("{0}/{1}", center.Id,session.Date);
+
+                                    if (DoseTracker.ContainsKey(centerKey)
+                                        && (DoseTracker[centerKey] ==
                                         string.Format(doseTrackerFormat,
                                                         session.MinimunAge,
                                                         session.CapacityDose1,
                                                         session.CapacityDose2)))
                                     {
-                                        logger.InfoFormat("Ignoring...No change for {0} - {1}",
+                                        logger.InfoFormat("[{0}] Ignoring...No change. Previous Values  - {1}",
                                             center.District,
-                                            DoseTracker[center.PinCode]);
+                                            DoseTracker[centerKey]);
 
                                         continue;
                                     }
-                                    else if (DoseTracker.ContainsKey(center.PinCode))
+                                    else if (DoseTracker.ContainsKey(centerKey)
+                                            && Convert.ToInt32(DoseTracker[centerKey].Split(',')[1]) >= session.CapacityDose1)
                                     {
-                                        DoseTracker[center.PinCode] = string.Format(doseTrackerFormat,
+                                        logger.InfoFormat("[{0}] Ignoring...Dose reduced to {1} - previous value:{1}",
+                                                            center.District,
+                                                            session.CapacityDose1,
+                                                            DoseTracker[centerKey]);
+
+                                        DoseTracker[centerKey] = string.Format(doseTrackerFormat,
+                                                                                    session.MinimunAge,
+                                                                                    session.CapacityDose1,
+                                                                                    session.CapacityDose2);
+                                        continue;
+
+                                    }
+                                    else if (DoseTracker.ContainsKey(centerKey))
+                                    {
+                                        DoseTracker[centerKey] = string.Format(doseTrackerFormat,
                                                                                     session.MinimunAge,
                                                                                     session.CapacityDose1,
                                                                                     session.CapacityDose2);
                                     }
                                     else
                                     {
-                                        DoseTracker.Add(center.PinCode, string.Format(doseTrackerFormat,
+                                        DoseTracker.Add(centerKey, string.Format(doseTrackerFormat,
                                                                                     session.MinimunAge,
                                                                                     session.CapacityDose1,
                                                                                     session.CapacityDose2));

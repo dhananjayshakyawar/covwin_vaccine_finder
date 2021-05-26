@@ -85,8 +85,9 @@ namespace CowinVaccineFinder
                                                         session.CapacityDose1,
                                                         session.CapacityDose2)))
                                     {
-                                        logger.InfoFormat("[{0}] Ignoring...No change. Previous Values  - {1}",
+                                        logger.InfoFormat("[{0}] Ignoring...No change. Previous Values  - [{1}]{2}",
                                             center.District,
+                                            centerKey,
                                             DoseTracker[centerKey]);
 
                                         continue;
@@ -94,9 +95,10 @@ namespace CowinVaccineFinder
                                     else if (DoseTracker.ContainsKey(centerKey)
                                             && Convert.ToInt32(DoseTracker[centerKey].Split(',')[1]) >= session.CapacityDose1)
                                     {
-                                        logger.InfoFormat("[{0}] Ignoring...Dose reduced to {1} - previous value:{1}",
+                                        logger.InfoFormat("[{0}] Ignoring...Dose reduced to {1} - previous value:[{2}]{3}",
                                                             center.District,
                                                             session.CapacityDose1,
+                                                            centerKey,
                                                             DoseTracker[centerKey]);
 
                                         DoseTracker[centerKey] = string.Format(doseTrackerFormat,

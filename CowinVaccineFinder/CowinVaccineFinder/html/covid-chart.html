@@ -25,7 +25,7 @@ var options = {
 		}
 	},
 	axisY:{
-		title: "Dose",
+		title: "Dose-1",
 		gridThickness: 0,
 		crosshair: {
 			enabled: true,
@@ -33,9 +33,10 @@ var options = {
 		}
 	},
     data: [{
-        type: "line",
-		toolTipContent: "{y} metric tons",
-        xValueType: "dateTime",
+        type: "area",
+		toolTipContent: "{y} Dose",
+		xValueType: "dateTime",
+		xValueFormatString: "hh:mm TT",
         dataPoints: dataPoints
     }]
 	};
@@ -49,7 +50,7 @@ var options = {
             if (csvLines[i].length > 0) {
                 points = csvLines[i].split(",");
                 dataPoints.push({
-                    x: (points[0] / 100) - 2208988800000,
+                    x: parseFloat(points[0]),
                     y: parseFloat(points[1])
                 });
             }

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -136,10 +137,17 @@ namespace CowinVaccineFinder
                             }
 
                             if (totalDoseForDistrict > 1)
-                                System.IO.File.AppendAllText(string.Format("html/data/{0}{1}.datapoints", district.Name, DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy"))
+                            {
+                                var filepath = RuntimeInformation.IsOSPlatform(OSPlatform.Linux)? 
+                                    "/var/www/html/data/{0}{1}.datapoints" 
+                                    : "html/data/{0}{1}.datapoints";
+
+                                System.IO.File.AppendAllText(string.Format(filepath, district.Name, DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy"))
                                 , string.Format("{0},{1}{2}", DateTime.Now.ToJavascriptTicks(),
                                                         totalDoseForDistrict,
                                                         Environment.NewLine));
+                            }
+
                             //check available
                         }
 

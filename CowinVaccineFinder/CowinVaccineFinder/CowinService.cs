@@ -32,7 +32,7 @@ namespace CowinVaccineFinder
 
                 if(!response.IsSuccessful)
                 {
-                    logger.WarnFormat("Response failed - {0}", response);
+                    logger.WarnFormat("Response failed - {0}", response.StatusCode.ToString());
                     return new List<District>();
                 }
 

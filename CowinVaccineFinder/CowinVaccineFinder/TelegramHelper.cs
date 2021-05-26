@@ -61,6 +61,7 @@ namespace CowinVaccineFinder
                     "https://selfregistration.cowin.gov.in/dashboard"
                   ))
                 );
+                System.Threading.Thread.Sleep(100);
             }
             catch (System.Exception e)
             {

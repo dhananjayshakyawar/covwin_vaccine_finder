@@ -174,10 +174,10 @@ namespace CowinVaccineFinder
                     tasks.Clear();
 
                     //CheckApiThreashold();
-                    Thread.Sleep(100);
+                    Thread.Sleep(500);
                 }
 
-                Thread.Sleep(6 * filteredDistricts.Count() * 1000);
+                Thread.Sleep((6 * filteredDistricts.Count() * 1000) + 1000);
                 //CheckApiThreashold();
             }
         }
